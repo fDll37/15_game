@@ -47,13 +47,15 @@ class LevelViewController: UIViewController {
     private lazy var collectionViewScore: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        
+
         view.delegate = self
         view.dataSource = self
         view.layer.cornerRadius = 15
         view.translatesAutoresizingMaskIntoConstraints = false
         view.register(LevelCollectionViewCell.self, forCellWithReuseIdentifier: String(describing: LevelCollectionViewCell.self))
+        
         return view
     }()
     
@@ -61,28 +63,17 @@ class LevelViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         layout()
-
+        setupGradient()
     }
-    
-//    override func viewDidLayoutSubviews() {
-//        super.viewDidLayoutSubviews()
-//        setGradientBackground()
-//    }
     
     @objc private func tapBack() {
         navigationController?.popViewController(animated: true)
     }
     
-    private func setGradientBackground() {
-        let colorTop =  UIColor(named: "top")!.cgColor
-        let colorBottom = UIColor(named: "down")!.cgColor
-                    
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [colorTop, colorBottom]
-        gradientLayer.locations = [0.0, 1.0]
-        gradientLayer.frame = collectionViewScore.bounds
-        
-        collectionViewScore.layer.insertSublayer(gradientLayer, at: 0)
+    private func setupGradient() {
+        let backView = Gradient()
+        backView.addGradient([UIColor(named: "top")!, UIColor(named: "down")!], locations: [0.0, 1.0], frame: view.frame)
+        collectionViewScore.backgroundView = backView
     }
     
     private func layout() {
@@ -154,3 +145,4 @@ extension LevelViewController: UICollectionViewDelegateFlowLayout {
         navigationController?.pushViewController(GameViewController(), animated: true)
     }
 }
+
