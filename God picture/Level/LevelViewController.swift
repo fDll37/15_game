@@ -67,6 +67,7 @@ class LevelViewController: UIViewController {
     }
     
     @objc private func tapBack() {
+        Sound.ChooseSound.click.play
         navigationController?.popViewController(animated: true)
     }
     

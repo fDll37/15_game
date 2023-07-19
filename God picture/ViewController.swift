@@ -9,8 +9,6 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    private var isSoundOn: Bool = true
-    
     private lazy var backgroundImage: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
@@ -91,18 +89,21 @@ class ViewController: UIViewController {
     }()
     
     @objc private func chooseLevel() {
+        Sound.ChooseSound.click.play
         navigationController?.pushViewController(LevelViewController(), animated: true)
     }
     @objc private func changeSound() {
-        print("tap")
-        soundButton.setImage(UIImage(named: isSoundOn ? "soundOff" : "soundOn"), for: .normal)
-        isSoundOn.toggle()
+        Sound.ChooseSound.click.play
+        soundButton.setImage(UIImage(named: Sound.shared.isPlay ? "soundOff" : "soundOn"), for: .normal)
+        Sound.shared.stopMusic()
     }
     @objc private func startPlay() {
+        Sound.ChooseSound.click.play
         let gameVC = GameViewController()
         navigationController?.pushViewController(gameVC, animated: true)
     }
     @objc private func showInfo() {
+        Sound.ChooseSound.click.play
         print("info")
     }
     
@@ -110,7 +111,6 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = true
         layout()
-
     }
     
 //    private func toNextScreen(_ type: TypeModule) {

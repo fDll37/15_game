@@ -52,6 +52,7 @@ class LoseView: UIView {
     }
     
     @objc private func loseTap() {
+        Sound.ChooseSound.click.play
         action()
     }
     

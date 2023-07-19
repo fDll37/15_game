@@ -149,16 +149,19 @@ class GameViewController: UIViewController {
     }
     
     @objc private func tapBack() {
+        Sound.ChooseSound.click.play
         navigationController?.popViewController(animated: true)
     }
     
     @objc private func nextLevel() {
+        Sound.ChooseSound.click.play
         StorageService.shared.saveCurrentLevel(game.currentLevel + 1)
         navigationController?.pushViewController(GameViewController(), animated: true)
         navigationController?.viewControllers.remove(at: (navigationController!.viewControllers.count) - 2)
     }
     
     @objc private func againLevel() {
+        Sound.ChooseSound.click.play
         navigationController?.pushViewController(GameViewController(), animated: true)
         navigationController?.viewControllers.remove(at: (navigationController!.viewControllers.count) - 2)
     }
@@ -253,6 +256,7 @@ class GameViewController: UIViewController {
     }
     
     private func gameWin() {
+        Sound.ChooseSound.great.play
         let score = ScoreView(frame: .zero, scoreData: StorageService.shared.getProgressByLevel(game.currentLevel))
         score.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(imageWinView)
@@ -298,7 +302,7 @@ class GameViewController: UIViewController {
     
     private func gameLose() {
         timer.invalidate()
-        
+        Sound.ChooseSound.bad.play
         let lose = LoseView {
             self.navigationController?.popViewController(animated: true)
         }
