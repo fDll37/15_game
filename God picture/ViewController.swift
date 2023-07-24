@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import WebKit
 
 class ViewController: UIViewController {
     
@@ -104,6 +105,7 @@ class ViewController: UIViewController {
     }
     @objc private func showInfo() {
         Sound.ChooseSound.click.play
+        navigationController?.pushViewController(InfoViewController(), animated: true)
         print("info")
     }
     
@@ -164,4 +166,5 @@ class ViewController: UIViewController {
         ])
     }
 }
+
 

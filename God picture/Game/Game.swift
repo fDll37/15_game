@@ -26,6 +26,7 @@ final class Game {
         self.countStar = data.countStar
         getImage()
         createMatrix()
+        prepareMatrix()
     }
         
     private func getImage() {
@@ -43,9 +44,16 @@ final class Game {
             }
             matrixImage.append(matrixLine)
         }
+    }
+    
+    private func prepareMatrix() {
+        deleteLastElement()
+        shuffled()
+    }
+    
+    private func deleteLastElement() {
         correctListId[correctListId.count - 1] = nil
         matrixImage[size.f - 1][size.s - 1] = nil
-        shuffled()
     }
     
     func nextLevel() {
@@ -54,6 +62,7 @@ final class Game {
             self.size = StorageService.shared.getProgressByLevel(currentLevel).size
             getImage()
             createMatrix()
+            prepareMatrix()
         }
     }
     
