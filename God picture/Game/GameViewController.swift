@@ -130,6 +130,11 @@ class GameViewController: UIViewController {
         layout()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        timer.invalidate()
+    }
+    
     private func setGesture() {
         let leftSwipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe))
         leftSwipeGesture.direction = .left
